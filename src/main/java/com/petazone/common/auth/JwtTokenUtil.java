@@ -6,6 +6,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,9 @@ import java.util.Date;
 
 @Component
 public class JwtTokenUtil {
-    private final String SECRET_KEY = "aUkR2V4rP/WsnpFXtMZGE0gM0x3TkE48g1W7X99lApw=";
+
+    @Value("${app.secret_key}")
+    private  String SECRET_KEY ;
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
